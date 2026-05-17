@@ -1,6 +1,7 @@
 package com.guilherme.lifeorganizer.model;
 
 import com.guilherme.lifeorganizer.model.enums.FinanceCategory;
+import com.guilherme.lifeorganizer.model.enums.FinanceType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,6 +30,10 @@ public class Finance {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
+    private FinanceType type;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private FinanceCategory category;
 
     @Column(nullable = false)
@@ -40,7 +45,7 @@ public class Finance {
     private LocalDateTime createdAt;
 
     @PrePersist
-    protected void onCreate(){
+    protected void onCreate() {
         this.createdAt = LocalDateTime.now();
         if (this.date == null) this.date = LocalDate.now();
     }

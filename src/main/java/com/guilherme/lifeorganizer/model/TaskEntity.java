@@ -8,13 +8,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "tasks")
 @Getter
 @Setter
 @NoArgsConstructor
-public class task {
+public class TaskEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,14 +35,14 @@ public class task {
     @Column(nullable = false)
     private TaskStatus status;
 
-    private LocalDate duedate;
+    private LocalDate dueDate;
 
     @Column(nullable = false, updatable = false)
-    private LocalDate createdAt;
+    private LocalDateTime createdAt;
 
     @PrePersist
-    protected void onCreate(){
-        this.createdAt = LocalDate.now();
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
         if (this.status == null) this.status = TaskStatus.PENDING;
         if (this.priority == null) this.priority = TaskPriority.MEDIUM;
     }
