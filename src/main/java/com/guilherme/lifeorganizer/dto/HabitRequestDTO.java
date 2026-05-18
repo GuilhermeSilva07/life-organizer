@@ -11,7 +11,7 @@ public record HabitRequestDTO(
 
         String description,
 
-        @NotNull(message = "Frequency id required")
-        HabitFrequency Frequency
+        @NotNull(message = "Frequency is required")
+        HabitFrequency frequency
 ) {
 }

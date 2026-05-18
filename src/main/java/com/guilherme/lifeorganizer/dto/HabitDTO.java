@@ -9,7 +9,7 @@ public record HabitDTO(
         Long id,
         String name,
         String description,
-        HabitFrequency Frequency,
+        HabitFrequency frequency,
         List<LocalDate> completions
 ) {
 }
