@@ -5,6 +5,7 @@ import com.guilherme.lifeorganizer.dto.HabitRequestDTO;
 import com.guilherme.lifeorganizer.model.Habit;
 import com.guilherme.lifeorganizer.model.enums.HabitFrequency;
 import com.guilherme.lifeorganizer.repository.HabitRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,7 +42,7 @@ public class HabitService {
         Habit habit = new Habit();
         habit.setName(requestDTO.name());
         habit.setDescription(requestDTO.description());
-        habit.setFrequency(requestDTO.Frequency());
+        habit.setFrequency(requestDTO.frequency());
         return convertToDTO(repository.save(habit));
     }
 
@@ -50,11 +51,12 @@ public class HabitService {
                 .map(habit -> {
                     habit.setName(requestDTO.name());
                     habit.setDescription(requestDTO.description());
-                    habit.setFrequency(requestDTO.Frequency());
+                    habit.setFrequency(requestDTO.frequency());
                     return convertToDTO(repository.save(habit));
                 });
     }
 
+    @Transactional
     public Optional<HabitDTO> completeToday(Long id) {
         return repository.findById(id)
                 .map(habit -> {
