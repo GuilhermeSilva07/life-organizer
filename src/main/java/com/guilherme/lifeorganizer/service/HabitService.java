@@ -5,7 +5,7 @@ import com.guilherme.lifeorganizer.dto.HabitRequestDTO;
 import com.guilherme.lifeorganizer.model.Habit;
 import com.guilherme.lifeorganizer.model.enums.HabitFrequency;
 import com.guilherme.lifeorganizer.repository.HabitRepository;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +19,7 @@ public class HabitService {
     @Autowired
     private HabitRepository repository;
 
+    @Transactional
     public List<HabitDTO> findAll(){
         return repository.findAll()
                 .stream()
@@ -26,11 +27,13 @@ public class HabitService {
                 .toList();
     }
 
+    @Transactional
     public Optional<HabitDTO> findById(Long id){
         return repository.findById(id)
                 .map(this::convertToDTO);
     }
 
+    @Transactional
     public List<HabitDTO> findByFrequency(HabitFrequency frequency){
         return repository.findByFrequency(frequency)
                 .stream()
