@@ -1,5 +1,6 @@
 package com.guilherme.lifeorganizer.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.guilherme.lifeorganizer.model.enums.TaskPriority;
 import com.guilherme.lifeorganizer.model.enums.TaskStatus;
 import jakarta.persistence.*;
@@ -35,7 +36,17 @@ public class TaskEntity {
     @Column(nullable = false)
     private TaskStatus status;
 
+    @JsonProperty("dueDate")
+    @Column(name = "due_date")
     private LocalDate dueDate;
+
+    public LocalDate getDueDate() {
+        return this.dueDate;
+    }
+
+    public void setDueDate(LocalDate dueDate) {
+        this.dueDate = dueDate;
+    }
 
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;

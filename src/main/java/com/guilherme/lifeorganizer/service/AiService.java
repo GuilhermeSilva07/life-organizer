@@ -36,7 +36,7 @@ public class AiService {
         StringBuilder context = new StringBuilder();
 
         List<TaskDTO> pendingTasks = taskService.findByStatus(TaskStatus.PENDING);
-        List<TaskDTO> inProgressTasks = taskService.findByStatus(TaskStatus.PROGRESS);
+        List<TaskDTO> inProgressTasks = taskService.findByStatus(TaskStatus.IN_PROGRESS);
         context.append("TASKS:\n");
         context.append("Pending: ").append(pendingTasks.size()).append("\n");
         pendingTasks.forEach(t -> context
